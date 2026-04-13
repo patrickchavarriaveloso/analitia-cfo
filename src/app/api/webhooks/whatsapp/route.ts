@@ -43,8 +43,7 @@ export async function POST(req: NextRequest) {
       const { text } = await generateText({
         model: anthropic("claude-sonnet-4-20250514"),
         system: FINANCIAL_ADVISOR_PROMPT + "\n\nResponde de forma breve (máximo 500 caracteres) ya que es un mensaje de WhatsApp.",
-        messages: [{ role: "user", content: body }],
-        maxTokens: 300,
+        messages: [{ role: "user", content: body }]
       });
       aiResponse = text;
     }

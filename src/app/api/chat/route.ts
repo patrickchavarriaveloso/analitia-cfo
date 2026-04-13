@@ -30,8 +30,7 @@ export async function POST(req: NextRequest) {
       messages: messages.map((m: { role: string; content: string }) => ({
         role: m.role as "user" | "assistant",
         content: m.content,
-      })),
-      maxTokens: 500,
+      }))
     });
 
     return NextResponse.json({ response: text });
