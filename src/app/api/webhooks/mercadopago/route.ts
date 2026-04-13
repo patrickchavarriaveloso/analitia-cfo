@@ -4,12 +4,13 @@ import { sendPaymentConfirmation } from "@/lib/emails";
 import { sendWhatsAppMessage } from "@/lib/whatsapp";
 import { formatCLP } from "@/lib/utils";
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+
 
 export async function POST(req: NextRequest) {
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || "https://dummy.supabase.co",
+    process.env.SUPABASE_SERVICE_ROLE_KEY || "dummy_key"
+  );
   try {
     const body = await req.json();
     const { type, data } = body;
