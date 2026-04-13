@@ -40,6 +40,7 @@ export default function FlujoCajaPage() {
       currency: "CLP",
       amount: Number(newEntry.amount),
       metadata: {},
+      subcategory: null,
     });
     setNewEntry({ entry_type: "income", category: "", description: "", amount: 0, date: new Date().toISOString().split("T")[0] });
     setShowForm(false);
