@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateText } from "ai";
-import Anthropic from "@ai-sdk/anthropic";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { FINANCIAL_ADVISOR_PROMPT } from "@/lib/ai-prompts";
 
 const TWILIO_SID = process.env.TWILIO_ACCOUNT_SID;
@@ -39,10 +39,9 @@ export async function POST(req: NextRequest) {
     let aiResponse = "Gracias por escribirnos. En este momento nuestro asistente no está disponible. Puedes contactarnos en contacto@analitia.cl";
 
     if (process.env.ANTHROPIC_API_KEY) {
+      const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
       const { text } = await generateText({
-        model: new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }).languageModel(
-          "claude-sonnet-4-20250514"
-        ),
+        model: anthropic("claude-sonnet-4-20250514"),
         system: FINANCIAL_ADVISOR_PROMPT + "\n\nResponde de forma breve (máximo 500 caracteres) ya que es un mensaje de WhatsApp.",
         messages: [{ role: "user", content: body }],
         maxTokens: 300,

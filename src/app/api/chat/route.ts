@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Anthropic from "@ai-sdk/anthropic";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { generateText } from "ai";
 import { SALES_AGENT_PROMPT, FINANCIAL_ADVISOR_PROMPT, SUPPORT_AGENT_PROMPT } from "@/lib/ai-prompts";
 
@@ -22,10 +22,10 @@ export async function POST(req: NextRequest) {
 
     const systemPrompt = PROMPTS[context] || SALES_AGENT_PROMPT;
 
+    const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
     const { text } = await generateText({
-      model: new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }).languageModel(
-        "claude-sonnet-4-20250514"
-      ),
+      model: anthropic("claude-sonnet-4-20250514"),
       system: systemPrompt,
       messages: messages.map((m: { role: string; content: string }) => ({
         role: m.role as "user" | "assistant",
