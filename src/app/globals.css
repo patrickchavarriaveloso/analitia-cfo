@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  /* AnalitIA Brand Colors */
+  --color-brand-50: #eef9ff;
+  --color-brand-100: #d8f1ff;
+  --color-brand-200: #b9e7ff;
+  --color-brand-300: #89d9ff;
+  --color-brand-400: #52c2ff;
+  --color-brand-500: #2ba3ff;
+  --color-brand-600: #1485f5;
+  --color-brand-700: #0d6de1;
+  --color-brand-800: #1158b6;
+  --color-brand-900: #144b8f;
+
+  /* Cyan accent (matching AnalitIA hero gradient) */
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+
+  /* Surface colors */
+  --color-surface-900: #0a0e1a;
+  --color-surface-800: #0f1729;
+  --color-surface-700: #162036;
+  --color-surface-600: #1e2a45;
+  --color-surface-500: #2a3654;
+
+  /* Semantic */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Fonts */
+  --font-display: "Cal Sans", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-surface-900);
+    color: #e2e8f0;
+  }
+
+  ::selection {
+    background: var(--color-brand-600);
+    color: white;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-600);
+  border-radius: 3px;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(15, 23, 41, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-cyan-400), var(--color-brand-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover glow */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+/* Pulse animation for live indicators */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
